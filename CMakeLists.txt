@@ -8,9 +8,11 @@ option(BASE64_BUILD_TESTS "add test projects" ON)
 
 ############################
 # Library
-add_library(base64 STATIC
+add_library(base64 STATIC 
     lib/decode.c
 )
+
+target_include_directories(base64 PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 set_target_properties(base64 PROPERTIES
     C_STANDARD 99
