@@ -1,27 +1,26 @@
-cmake_minimum_required(VERSION 3.1)
+cmake_minimum_required(VERSION 3.5)
 
-project(base64 LANGUAGES C VERSION 0.0.1)
+project(b64_stream VERSION 0.0.1)
 
-############################
-# Compilation options
-option(BASE64_BUILD_TESTS "add test projects" ON)
+option(B64_STREAM_BUILD_TESTS "add test projects" ON)
 
-############################
-# Library
-add_library(base64 STATIC 
+add_library(b64_stream STATIC
+    # library files
     lib/decode.c
+    include/b64_stream.h
 )
 
-target_include_directories(base64 PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
-
-set_target_properties(base64 PROPERTIES
+set_target_properties(b64_stream PROPERTIES
     C_STANDARD 99
     C_STANDARD_REQUIRED YES
     C_EXTENSIONS OFF
 )
 
+target_include_directories(b64_stream PUBLIC
+  ${CMAKE_CURRENT_SOURCE_DIR}/include
+)
 
-if (BASE64_BUILD_TESTS)
+if (B64_STREAM_BUILD_TESTS)
     enable_testing()
     add_subdirectory(tests)
 endif()

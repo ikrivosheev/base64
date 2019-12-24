@@ -1,9 +1,5 @@
-#ifndef _PARSER_H_
-#define _PARSER_H_
-
-#ifdef __cplusplus
-extern "C" {
-#endif
+#ifndef _TABLE_H
+#define _TABLE_H
 
 static const char BASE64_PAD = '=';
 static const unsigned char BASE64_TABLE[256] =
@@ -27,19 +23,4 @@ static const unsigned char BASE64_TABLE[256] =
     64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64
 };
 
-
-struct base64_state {
-    int phase;
-    unsigned char encoded[4];
-    unsigned char decoded[4];
-};
-
-void b64decode_stream_init(struct base64_state *state);
-void b64decode_stream(struct base64_state *state, const char* src, char* out);
-int b64decode_stream_final(struct base64_state *state);
-
-#ifdef __cplusplus
-}
-#endif
-
-#endif // _PARSER_H_
+#endif // _TABLE_H
