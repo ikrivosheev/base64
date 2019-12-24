@@ -42,19 +42,15 @@ void b64_stream_decode(
             _b64_decode_block(state);
             switch (state->phase) {
                 case 1:
-                    *(out++) = state->decoded[0];
-                    *out_len += 1;
                     break;
                 case 2:
                     *(out++) = state->decoded[0];
-                    *(out++) = state->decoded[1];
-                    *out_len += 2;
+                    *out_len += 1;
                     break;
                 case 3:
                     *(out++) = state->decoded[0];
                     *(out++) = state->decoded[1];
-                    *(out++) = state->decoded[3];
-                    *out_len += 3;
+                    *out_len += 2;
                     break;
             }
             state->phase = 0;

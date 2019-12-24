@@ -42,6 +42,10 @@ int test_decode()
     printf("START: DecodeTest with padding\n");
     fail |= assert_decode("QUE=", "AA", 2);
     printf("END: DecodeTest with padding\n");
+    printf("START: DecodeTest with big padding\n");
+    fail |= assert_decode("QQ==", "A", 1);
+    printf("END: DecodeTest with big padding\n");
+
     return fail;
 }
 
