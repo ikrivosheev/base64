@@ -71,6 +71,6 @@ void b64_stream_decode(
 
 inline int b64_stream_decode_final(struct b64_state *state) 
 {
-    return state->phase == 0 ? 0: -1;
+    return state->phase == 0;
 }
 

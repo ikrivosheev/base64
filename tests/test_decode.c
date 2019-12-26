@@ -5,15 +5,42 @@
 #include "b64_stream.h"
 
 
-#define ASSERT_EQ(expected, actual, message) \
-    do { if(expected != actual) \
+#define TEST(func) {"test_" #func, test_ ## func}
+#define ARRAY_SIZE(arr) (sizeof(arr) / sizeof((arr)[0]))
+#define RUN(tests) runner(tests, ARRAY_SIZE(tests))
+#define ASSERT(condition, message) \
+    do { \
+        if(!condition) \
             { \
                 printf("FAIL: "); \
                 printf(message); \
                 printf("\n"); \
-                return true; \
+                return false; \
             } \
-    } while (0); \
+    } while (0);
+
+typedef bool (*test_func_t)(void);
+
+typedef struct test
+{
+    char* name;
+    test_func_t test;
+    
+} test_t;
+
+
+static int runner(test_t tests[], size_t size) 
+{
+    bool success = true;
+    for (int i = 0; i < size; i++)
+    {
+        printf("Test %s START\n", tests[i].name);
+        bool test_success = tests[i].test();
+        printf("Test %s %s\n", tests[i].name, test_success ? "SUCCESS" : "FAIL");
+        success &= test_success;
+    }
+    return success ? 0 : 1;
+}
 
 
 static bool assert_decode(
@@ -28,31 +55,33 @@ static bool assert_decode(
     b64_stream_decode_init(&state);
     b64_stream_decode(&state, src, 4, &result[0], &result_len);
 
-    ASSERT_EQ(b64_stream_decode_final(&state), 0, "b64_stream_decode_final");
-    ASSERT_EQ(expected_len, result_len, "Decoded result length is not equal expected");
-    ASSERT_EQ(strncmp(result, expected, expected_len), 0, "Decoded result is not equal expected")
+    ASSERT(b64_stream_decode_final(&state), "b64_stream_decode_final");
+    ASSERT(expected_len == result_len, "Decoded result length is not equal expected");
+    ASSERT(strncmp(result, expected, expected_len) == 0, "Decoded result is not equal expected");
+    return true;
 }
 
-int test_decode() 
+bool test_decode_simple()
 {
-    bool fail = false;
-    printf("START: DecodeTest simple\n");
-    fail |= assert_decode("QUFB", "AAA", 3);
-    printf("END: DecodeTest simple\n");
-    printf("START: DecodeTest with padding\n");
-    fail |= assert_decode("QUE=", "AA", 2);
-    printf("END: DecodeTest with padding\n");
-    printf("START: DecodeTest with big padding\n");
-    fail |= assert_decode("QQ==", "A", 1);
-    printf("END: DecodeTest with big padding\n");
-
-    return fail;
+    return assert_decode("QUFB", "AAA", 3);
 }
 
+bool test_decode_padding()
+{
+    return assert_decode("QUE=", "AA", 2);
+}
+
+bool test_decode_big_padding()
+{
+    return assert_decode("QQ==", "A", 1);
+}
 
 int main()
 {
-    bool fail = false;
-    fail |= test_decode();
-    return fail ? 1 : 0;
+    test_t tests[] = {
+        TEST(decode_simple),
+        TEST(decode_padding),
+        TEST(decode_big_padding),
+    };
+    return RUN(tests);
 }
