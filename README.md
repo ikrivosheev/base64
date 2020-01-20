@@ -1,11 +1,72 @@
-# base64
+# b64_stream
 
-Base64 stream encode/decode
-
-## usage
-
-```c
-#include <include/base64.h>
-```
+Base64 stream encode/decode library
 
 ## API
+
+### Encoding
+
+#### b64_stream_encode_init
+
+```c
+struct b64_encode_state 
+{
+    int phase;
+    size_t out_len;
+    char buffer[3];
+};
+
+void b64_stream_encode_init(struct b64_encode_state *state);
+```
+
+Call this function for init state and befor calling `b64_stream_decode()`
+
+
+#### b64_stream_encode
+
+```c
+void b64_stream_encode(
+    struct b64_encode_state *state,
+    const char* str,
+    size_t src_len,
+    char* out
+);
+```
+
+#### b64_stream_encode_final
+
+```c
+int b64_stream_encode_final(struct b64_encode_state *state, char* out);
+```
+
+### Decoding
+
+#### b64_stream_decode_init
+
+```c
+struct b64_decode_state 
+{
+    int phase;
+    size_t out_len;
+    char buffer[4];
+};
+
+void b64_stream_decode_init(struct b64_decode_state *state);
+```
+
+#### b64_stream_decode
+
+```c
+void b64_stream_decode(
+    struct b64_decode_state *state, 
+    const char* src, 
+    size_t src_len, 
+    char* out
+);
+```
+
+#### b64_stream_decode_final
+
+```c
+int b64_stream_decode_final(struct b64_decode_state *state);
+```
