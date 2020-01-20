@@ -2,7 +2,7 @@
 #define _TABLE_H
 
 static const char BASE64_PAD = '=';
-static const unsigned char BASE64_TABLE[256] =
+static const char BASE64_TABLE[256] =
 {
     /* ASCII table */
     64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64,
@@ -22,5 +22,9 @@ static const unsigned char BASE64_TABLE[256] =
     64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64,
     64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64
 };
+
+static const char BASIS_64[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+
+
 
 #endif // _TABLE_H

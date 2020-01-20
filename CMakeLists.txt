@@ -7,6 +7,7 @@ option(B64_STREAM_BUILD_TESTS "add test projects" ON)
 add_library(b64_stream STATIC
     # library files
     lib/decode.c
+    lib/encode.c
     include/b64_stream.h
 )
 

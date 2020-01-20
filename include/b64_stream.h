@@ -7,37 +7,40 @@
 extern "C" {
 #endif
 
-struct b64_state {
+
+struct b64_decode_state 
+{
     int phase;
-    unsigned char encoded[4];
-    unsigned char decoded[4];
+    size_t out_len;
+    char buffer[4];
+};
+
+struct b64_encode_state 
+{
+    int phase;
+    size_t out_len;
+    char buffer[3];
 };
 
 // Decode functions
-void b64_stream_decode_init(struct b64_state *state);
+void b64_stream_decode_init(struct b64_decode_state *state);
 void b64_stream_decode(
-    struct b64_state *state, 
+    struct b64_decode_state *state, 
     const char* src, 
     size_t src_len, 
-    char* out,
-    size_t* out_len
+    char* out
 );
-int b64_stream_decode_final(struct b64_state *state);
+int b64_stream_decode_final(struct b64_decode_state *state);
 
 // Encode functions
-void b64_stream_encode_init(struct b64_state *state);
+void b64_stream_encode_init(struct b64_encode_state *state);
 void b64_stream_encode(
-    struct b64_state *state,
+    struct b64_encode_state *state,
     const char* str,
     size_t src_len,
-    char* out,
-    size_t* out_len
+    char* out
 );
-void b64_stream_encode_final(
-    struct b64_state *state,
-    char* out,
-    size_t* out_len
-);
+int b64_stream_encode_final(struct b64_encode_state *state, char* out);
 
 #ifdef __cplusplus
 }

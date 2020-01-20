@@ -2,6 +2,7 @@
 #define _TESTS_H
 
 #include <stdbool.h>
+#include <stdio.h>
 
 #define TEST(func) {"test_" #func, test_ ## func}
 #define ARRAY_SIZE(arr) (sizeof(arr) / sizeof((arr)[0]))
@@ -32,9 +33,8 @@ int runner(test_t tests[], size_t size)
     bool success = true;
     for (int i = 0; i < size; i++)
     {
-        printf("Test %s START\n", tests[i].name);
         bool test_success = tests[i].test();
-        printf("Test %s %s\n", tests[i].name, test_success ? "SUCCESS" : "FAIL");
+        printf("TEST %s %s\n", tests[i].name, test_success ? "SUCCESS" : "FAIL");
         success &= test_success;
     }
     return success ? 0 : 1;
