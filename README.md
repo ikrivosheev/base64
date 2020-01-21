@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/ikrivosheev/b64_stream.svg?branch=master)](https://travis-ci.com/ikrivosheev/b64_stream)
+
 # Base64 stream encode/decode library
 
 ## API
