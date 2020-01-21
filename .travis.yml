@@ -2,6 +2,7 @@ language: c
 services: docker
 
 os: linux
+install: skip
 
 arch:
   - amd64
