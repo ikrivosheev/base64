@@ -1,6 +1,4 @@
-# b64_stream
-
-Base64 stream encode/decode library
+# Base64 stream encode/decode library
 
 ## API
 
