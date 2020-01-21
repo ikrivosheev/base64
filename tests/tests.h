@@ -9,7 +9,7 @@
 #define RUN(tests) runner(tests, ARRAY_SIZE(tests))
 #define ASSERT(condition, message) \
     do { \
-        if(!condition) \
+        if(!(condition)) \
             { \
                 printf("FAIL: "); \
                 printf(message); \
