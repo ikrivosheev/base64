@@ -1,23 +1,18 @@
 language: c
 services: docker
 
-jobs:
-  include:
-    - name: linux-amd64-gcc
-      os: linux
-      arch: amd64
-      compiler: gcc
-      script:
-        - cmake .
-        - cmake --build .
-        - cmake --build . --target test
+os: linux
 
-    - name: linux-amd64-clang
-      os: linux
-      arch: amd64
-      compiler: clang
-      script:
-        - cmake .
-        - cmake --build .
-        - cmake --build . --target test
+arch:
+  - amd64
+  - arm64
+
+compiler:
+  - gcc
+  - clang
+
+script:
+  - cmake .
+  - cmake --build .
+  - cmake --build . -- target test
 
