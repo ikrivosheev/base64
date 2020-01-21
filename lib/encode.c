@@ -1,6 +1,6 @@
 #include <string.h>
 
-#include "b64_stream.h"
+#include "include/b64_stream.h"
 #include "table.h"
 
 

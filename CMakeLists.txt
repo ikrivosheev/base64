@@ -18,7 +18,7 @@ set_target_properties(b64_stream PROPERTIES
 )
 
 target_include_directories(b64_stream PUBLIC
-  ${CMAKE_CURRENT_SOURCE_DIR}/include
+  ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
 if (B64_STREAM_BUILD_TESTS)
