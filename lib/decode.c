@@ -12,12 +12,13 @@ inline void b64_stream_decode_init(struct b64_decode_state *state)
 }
 
 
-void b64_stream_decode(
+int b64_stream_decode(
     struct b64_decode_state *state, 
     const char* src, 
     size_t src_len, 
     char* out) 
 {
+    int decoded_len = 0;
     size_t i;
     char this_ch;
 
@@ -40,11 +41,13 @@ void b64_stream_decode(
                 case 2:
                     *(out++) = state->buffer[0] << 2 | state->buffer[1] >> 4;
                     state->out_len += 1;
+                    decoded_len++;
                     break;
                 case 3:
                     *(out++) = state->buffer[0] << 2 | state->buffer[1] >> 4;
                     *(out++) = state->buffer[1] << 4 | state->buffer[2] >> 2;
                     state->out_len += 2;
+                    decoded_len += 2;
                     break;
             }
             state->phase = 0;
@@ -58,9 +61,11 @@ void b64_stream_decode(
             *(out++) = state->buffer[1] << 4 | state->buffer[2] >> 2;
             *(out++) = state->buffer[2] << 6 | state->buffer[3];
             state->out_len += 3;
+            decoded_len += 3;
             memset(state->buffer, 0, sizeof(state->buffer));
         }
     }
+    return decoded_len;
 }
 
 inline int b64_stream_decode_final(struct b64_decode_state *state) 

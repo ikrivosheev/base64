@@ -16,7 +16,7 @@ static bool assert_decode(
     b64_stream_decode_init(&state);
     for (i = 0; i < chunks_len; i++)
     {
-        b64_stream_decode(&state, chunks[i], strlen(chunks[i]), result);
+        b64_stream_decode(&state, chunks[i], strlen(chunks[i]), result + state.out_len);
     }
 
     ASSERT(b64_stream_decode_final(&state), "b64_stream_decode_final");
@@ -49,6 +49,12 @@ bool test_decode_with_newline()
     return assert_decode(chunks, 1, "A", 1);
 }
 
+bool test_decode_chunks()
+{
+    const char* chunks[] = {"MTI", "zNDU2"};
+    return assert_decode(chunks, 2, "123456", 6);
+}
+
 int main()
 {
     test_t tests[] = {
@@ -56,6 +62,7 @@ int main()
         TEST(decode_padding),
         TEST(decode_big_padding),
         TEST(decode_with_newline),
+        TEST(decode_chunks),
     };
     return RUN(tests);
 }
