@@ -27,19 +27,19 @@ static bool assert_encode(
     return true;
 }
 
-bool test_encode_simple()
+static bool test_encode_simple()
 {
     const char* chunks[] = {"AAA"};
     return assert_encode(chunks, 1, "QUFB", 4);
 }
 
-bool test_encode_with_padding()
+static bool test_encode_with_padding()
 {
     const char* chunks[] = {"AA"};
     return assert_encode(chunks, 1, "QUE=", 4);
 }
 
-bool test_encode_chunks()
+static bool test_encode_chunks()
 {
     const char* chunks[] = {"12", "34", "56"};
     return assert_encode(chunks, 3, "MTIzNDU2", 8);

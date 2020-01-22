@@ -25,31 +25,31 @@ static bool assert_decode(
     return true;
 }
 
-bool test_decode_simple()
+static bool test_decode_simple()
 {
     const char* chunks[] = {"QUFB"};
     return assert_decode(chunks, 1, "AAA", 3);
 }
 
-bool test_decode_padding()
+static bool test_decode_padding()
 {
     const char* chunks[] = {"QUE="};
     return assert_decode(chunks, 1, "AA", 2);
 }
 
-bool test_decode_big_padding()
+static bool test_decode_big_padding()
 {
     const char* chunks[] = {"QQ=="};
     return assert_decode(chunks, 1, "A", 1);
 }
 
-bool test_decode_with_newline()
+static bool test_decode_with_newline()
 {
     const char* chunks[] = {"Q\nQ=="};
     return assert_decode(chunks, 1, "A", 1);
 }
 
-bool test_decode_chunks()
+static bool test_decode_chunks()
 {
     const char* chunks[] = {"MTI", "zNDU2"};
     return assert_decode(chunks, 2, "123456", 6);
