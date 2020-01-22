@@ -25,7 +25,7 @@ Call this function for init state and befor calling `b64_stream_decode()`
 #### b64_stream_encode
 
 ```c
-void b64_stream_encode(
+int b64_stream_encode(
     struct b64_encode_state *state,
     const char* str,
     size_t src_len,
@@ -57,7 +57,7 @@ void b64_stream_decode_init(struct b64_decode_state *state);
 #### b64_stream_decode
 
 ```c
-void b64_stream_decode(
+int b64_stream_decode(
     struct b64_decode_state *state, 
     const char* src, 
     size_t src_len, 
