@@ -36,7 +36,7 @@ int b64_stream_decode_final(struct b64_decode_state *state);
 void b64_stream_encode_init(struct b64_encode_state *state);
 int b64_stream_encode(
     struct b64_encode_state *state,
-    const char* str,
+    const char* src,
     size_t src_len,
     char* out
 );
