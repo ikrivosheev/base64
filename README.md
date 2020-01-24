@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/ikrivosheev/b64_stream.svg?branch=master)](https://travis-ci.com/ikrivosheev/b64_stream)
+[![Build Status](https://travis-ci.com/ikrivosheev/base64.svg?branch=master)](https://travis-ci.com/ikrivosheev/base64)
 
 # Base64 stream encode/decode library
 
