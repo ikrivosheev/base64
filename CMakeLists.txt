@@ -1,7 +1,8 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(b64_stream VERSION 0.0.1)
+project(b64_stream VERSION 0.3.0)
 
+option(B64_STREAM_BUILD_EXE "add executable" ON)
 option(B64_STREAM_BUILD_TESTS "add test projects" ON)
 
 add_library(b64_stream STATIC
@@ -24,4 +25,8 @@ target_include_directories(b64_stream PUBLIC
 if (B64_STREAM_BUILD_TESTS)
     enable_testing()
     add_subdirectory(tests)
+endif()
+
+if (B64_STREAM_BUILD_EXE)
+    add_subdirectory(bin)
 endif()

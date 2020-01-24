@@ -37,13 +37,15 @@ int b64_stream_encode(
             memset(state->buffer, 0, sizeof(state->buffer));       
        }
     }
-
+    return encoded_len;
 }
 
 int b64_stream_encode_final(struct b64_encode_state *state, char* out)
 {
     switch (state->phase)
     {
+        case 0:
+            return 0;
         case 1:
             *(out++) = BASIS_64[state->buffer[0] >> 2 & 0x3F];
             *(out++) = BASIS_64[(state->buffer[0] & 0x3) << 4];

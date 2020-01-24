@@ -33,6 +33,12 @@ static bool test_encode_simple()
     return assert_encode(chunks, 1, "QUFB", 4);
 }
 
+static bool test_encode_long()
+{
+    const char* chunks[] = {"12345"};
+    return assert_encode(chunks, 1, "MTIzNDU=", 8);
+}
+
 static bool test_encode_with_padding()
 {
     const char* chunks[] = {"AA"};
@@ -50,6 +56,7 @@ int main()
 {
     test_t tests[] = {
         TEST(encode_simple),
+        TEST(encode_long),
         TEST(encode_with_padding),
         TEST(encode_chunks),
     };
