@@ -21,7 +21,7 @@ static bool assert_encode(
         b64_stream_encode(&state, chunks[i], strlen(chunks[i]), result + state.out_len);
     }
     
-    ASSERT(b64_stream_encode_final(&state, result + state.out_len), "b64_stream_encode_final");
+    ASSERT(b64_stream_encode_final(&state, result + state.out_len) >= 0, "b64_stream_encode_final");
     ASSERT(expected_len == state.out_len, "Encoded result length is not equal expected");
     ASSERT(strncmp(result, expected, expected_len) == 0, "Decoded result is not equal expected");
     return true;
