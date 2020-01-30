@@ -101,12 +101,12 @@ int main(int argc, char* argv[])
         else
         {
             fd = fopen(argv[i], "rb");
-            i++;
             if (fd == NULL)
             {
                 printf("base64: %s: No such file or directory\n", argv[i]);
                 return 1;
             }
+            i++;
         }
     }
 
