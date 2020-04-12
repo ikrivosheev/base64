@@ -28,7 +28,7 @@ if (B64_STREAM_BUILD_TESTS)
 endif()
 
 if (B64_STREAM_BUILD_EXE)
-    add_executable(base64 base64.c)
+    add_executable(base64 bin/base64.c)
 
     target_link_libraries(base64 b64_stream)
 endif()
